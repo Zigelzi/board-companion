@@ -7,17 +7,22 @@
     <section>
       <v-player-container />
     </section>
+    <section>
+      <v-score-calculator />
+    </section>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import PlayerContainer from "@/components/PlayerContainer.vue";
+import ScoreCalculator from "@/components/ScoreCalculator.vue";
 
 export default {
   name: "Home",
   components: {
-    "v-player-container": PlayerContainer
+    "v-player-container": PlayerContainer,
+    "v-score-calculator": ScoreCalculator
   }
 };
 </script>
