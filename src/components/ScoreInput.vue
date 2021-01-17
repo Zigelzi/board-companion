@@ -1,19 +1,43 @@
 <template>
   <div>
-    <div class="score-input-container">
-      <label class="score-input-label" :for="label">{{ label }}</label>
+    <div class="score-input-container" v-if="multiplierExist">
+      <label class="score-input-label" :for="content.name">{{
+        content.name + " multiplier"
+      }}</label>
       <div class="score-button-container">
-        <button class="btn-counter" @click="updateField('decrement')">
+        <button class="btn-counter" @click="updateMultiplier('decrement')">
           -
         </button>
         <input
           type="number"
           class="score-input"
-          :name="label"
-          :id="label"
-          v-model="value"
+          :name="content.name"
+          :id="content.name"
+          v-model="content.multiplier"
         />
-        <button class="btn-counter" @click="updateField('increment')">+</button>
+        <button class="btn-counter" @click="updateMultiplier('increment')">
+          +
+        </button>
+      </div>
+    </div>
+    <div class="score-input-container" v-if="grossPointsExist">
+      <label class="score-input-label" :for="content.name">{{
+        content.name + " points"
+      }}</label>
+      <div class="score-button-container">
+        <button class="btn-counter" @click="updateGrossPoints('decrement')">
+          -
+        </button>
+        <input
+          type="number"
+          class="score-input"
+          :name="content.name"
+          :id="content.name"
+          v-model="content.grossPoints"
+        />
+        <button class="btn-counter" @click="updateGrossPoints('increment')">
+          +
+        </button>
       </div>
     </div>
   </div>
@@ -21,20 +45,45 @@
 <script>
 export default {
   props: {
-    label: String,
-    value: Number
+    content: Object
   },
   methods: {
-    updateField(updateDirection) {
+    updateMultiplier(updateDirection) {
       console.log(updateDirection);
       if (updateDirection === "increment") {
-        this.$emit("valueUpdated", "incremented");
+        this.content.multiplier++;
+        this.$emit("valueUpdated", this.content);
       }
       if (updateDirection === "decrement") {
-        if (this.value > 0) {
-          this.$emit("valueUpdated", "decremented");
+        if (this.content.multiplier > 0) {
+          this.content.multiplier--;
+          this.$emit("valueUpdated", this.content);
         }
       }
+    },
+    updateGrossPoints(updateDirection) {
+      console.log(updateDirection);
+      if (updateDirection === "increment") {
+        this.content.grossPoints++;
+        this.$emit("valueUpdated", this.content);
+      }
+      if (updateDirection === "decrement") {
+        if (this.content.grossPoints > 0) {
+          this.content.grossPoints--;
+          this.$emit("valueUpdated", this.content);
+        }
+      }
+    },
+    checkForKey(object, key) {
+      return Object.keys(object).includes(key);
+    }
+  },
+  computed: {
+    grossPointsExist() {
+      return this.checkForKey(this.content, "grossPoints");
+    },
+    multiplierExist() {
+      return this.checkForKey(this.content, "multiplier");
     }
   }
 };
@@ -52,10 +101,15 @@ export default {
 .score-input {
   max-width: 100px;
 }
+
+.score-input-label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
 .btn-counter {
   background: #cacaca;
   border: none;
   padding: 20px;
-  margin: 0 10px;
 }
 </style>
