@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="score-input-container" v-if="pointsFieldExists">
+    <div class="score-input-container">
       <label class="score-input-label" :for="field.name">{{
         field.name
       }}</label>
       <div class="score-button-container">
-        <button class="btn-counter" @click="decrement('points')">
+        <button class="btn-counter" @click="decrement">
           -
         </button>
 
@@ -14,28 +14,9 @@
           class="score-input"
           :name="field.name"
           :id="field.name"
-          v-model="field.points"
+          v-model="field.value"
         />
-        <button class="btn-counter" @click="increment('points')">+</button>
-      </div>
-    </div>
-    <div class="score-input-container" v-if="comboFieldExists">
-      <label class="score-input-label" :for="field.name + '-combo'"
-        >{{ field.name }} Combo</label
-      >
-      <div class="score-button-container">
-        <button class="btn-counter" @click="decrement('combo')">
-          -
-        </button>
-        <input
-          type="number"
-          class="score-input"
-          :name="field.name + '-combo'"
-          :id="field.name + '-combo'"
-          v-model="field.combo"
-        />
-
-        <button class="btn-counter" @click="increment('combo')">+</button>
+        <button class="btn-counter" @click="increment">+</button>
       </div>
     </div>
   </div>
@@ -46,38 +27,15 @@ export default {
     field: Object
   },
   methods: {
-    increment(fieldType) {
-      if (fieldType === "points") {
-        this.field.points++;
-        this.$emit("scoreUpdated", this.field.points);
-      } else {
-        this.field.combo++;
-        this.$emit("scoreUpdated", this.field.combo);
+    increment() {
+      this.field.value++;
+      this.$emit("scoreUpdated", this.field.value);
+    },
+    decrement() {
+      if (this.field.value > 0) {
+        this.field.value--;
+        this.$emit("scoreUpdated", this.field.value);
       }
-    },
-    decrement(fieldType) {
-      if (fieldType === "points") {
-        if (this.field.points > 0) {
-          this.field.points--;
-          this.$emit("scoreUpdated", this.field.points);
-        }
-      } else {
-        if (this.field.combo > 0) {
-          this.field.combo--;
-          this.$emit("scoreUpdated", this.field.combo);
-        }
-      }
-    },
-    fieldContainsKey(field, key) {
-      return Object.keys(field).includes(key);
-    }
-  },
-  computed: {
-    pointsFieldExists() {
-      return this.fieldContainsKey(this.field, "points");
-    },
-    comboFieldExists() {
-      return this.fieldContainsKey(this.field, "combo");
     }
   }
 };

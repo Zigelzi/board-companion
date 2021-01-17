@@ -3,12 +3,24 @@
     <div>
       <h2>Player Score</h2>
       <div id="score-form">
-        <v-score-input
-          v-for="(category, index) in score.categories"
-          :key="index"
-          :field="category"
-          @scoreUpdated="updateScore"
-        />
+        <div class="points-container">
+          <h3>Points</h3>
+          <v-score-input
+            v-for="(field, name, index) in score.points"
+            :key="`points-${index}`"
+            :field="field"
+            @scoreUpdated="updateScore"
+          />
+        </div>
+        <div class="multiplier-container">
+          <h3>Multipliers</h3>
+          <v-score-input
+            v-for="(field, name, index) in score.multipliers"
+            :key="`multiplier-${index}`"
+            :field="field"
+            @scoreUpdated="updateScore"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -23,40 +35,48 @@ export default {
     return {
       score: {
         total: 0,
-        categories: {
+        points: {
           victory: {
             name: "Victory Points",
-            points: 0
-          },
-          industry: {
-            name: "Industry",
-            combo: 0
-          },
-          military: {
-            name: "Military",
-            combo: 0
-          },
-          science: {
-            name: "Science",
-            combo: 0
-          },
-          economy: {
-            name: "Economy",
-            combo: 0
-          },
-          discovery: {
-            name: "Discovery",
-            combo: 0
+            value: 0
           },
           generals: {
             name: "Generals",
-            points: 0,
-            combo: 0
+            value: 0
           },
           financers: {
             name: "Financers",
-            points: 0,
-            combo: 0
+            value: 0
+          }
+        },
+        multipliers: {
+          industry: {
+            name: "Industry",
+            value: 0
+          },
+          military: {
+            name: "Military",
+            value: 0
+          },
+          science: {
+            name: "Science",
+            value: 0
+          },
+          economy: {
+            name: "Economy",
+            value: 0
+          },
+          discovery: {
+            name: "Discovery",
+            value: 0
+          },
+          generals: {
+            name: "Generals",
+            value: 0
+          },
+          financers: {
+            name: "Financers",
+            value: 0
           }
         }
       }
