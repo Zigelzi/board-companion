@@ -4,22 +4,43 @@
       <h2>Player Score</h2>
       <div id="score-form">
         <div class="points-container">
-          <h3>Points</h3>
+          <h3>Gross Points</h3>
           <v-score-input
-            v-for="(field, name, index) in score.points"
-            :key="`points-${index}`"
-            :field="field"
-            @scoreUpdated="updateScore"
+            :label="score.victoryPoints.name"
+            :value="score.victoryPoints.points"
+            key="victory-points"
+            @valueUpdated="updateScore"
           />
         </div>
-        <div class="multiplier-container">
-          <h3>Multipliers</h3>
+        <div class="character-point-container">
+          <h3>Character Points</h3>
           <v-score-input
-            v-for="(field, name, index) in score.multipliers"
-            :key="`multiplier-${index}`"
-            :field="field"
-            @scoreUpdated="updateScore"
+            v-for="(character, name, index) in score.characterPoints"
+            :key="`characterPoints-${index}`"
+            :label="character.name"
+            :value="character.points"
+            @valueUpdated="updateScore"
           />
+          <v-score-input
+            v-for="(character, name, index) in score.characterPoints"
+            :key="`characterMultipliers-${index}`"
+            :label="character.name"
+            :value="character.multiplier"
+            @valueUpdated="updateScore"
+          />
+        </div>
+        <div class="industry-point-container">
+          <h3>Industry Points</h3>
+          <div
+            v-for="(industry, name, index) in score.industryPoints"
+            :key="`industry-${index}`"
+          >
+            <v-score-input
+              :label="industry.name"
+              @valueUpdated="updateScore"
+              :value="industry.points"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -35,71 +56,73 @@ export default {
     return {
       score: {
         total: 0,
-        points: {
-          victory: {
-            name: "Victory Points",
-            value: 0
-          },
+        victoryPoints: {
+          name: "Victory Points",
+          points: 0
+        },
+        characterPoints: {
           generals: {
             name: "Generals",
-            value: 0
+            multiplier: 0,
+            points: 0
           },
           financers: {
             name: "Financers",
-            value: 0
+            multiplier: 0,
+            points: 0
           }
         },
-        multipliers: {
+        industryPoints: {
           industry: {
             name: "Industry",
-            value: 0
+            multiplier: 0,
+            points: 0
           },
           military: {
             name: "Military",
-            value: 0
+            multiplier: 0,
+            points: 0
           },
           science: {
             name: "Science",
-            value: 0
+            multiplier: 0,
+            points: 0
           },
           economy: {
             name: "Economy",
-            value: 0
+            multiplier: 0,
+            points: 0
           },
           discovery: {
             name: "Discovery",
-            value: 0
-          },
+            multiplier: 0,
+            points: 0
+          }
+        },
+        characterMultipliers: {
           generals: {
             name: "Generals",
-            value: 0
+            points: 0
           },
           financers: {
             name: "Financers",
-            value: 0
+            points: 0
           }
         }
       }
     };
   },
   methods: {
-    updateScore() {
+    updateScore(updatedField) {
       // Calculate VP scores
       this.calculateVictorypoints();
+      console.log("Parent:" + updatedField);
       // Calculate General Scores
       // Calculate Financer scores
     },
     calculateVictorypoints() {
-      const iterateObject = obj => {
-        console.log(obj);
-        Object.keys(obj).forEach(key => {
-          console.log(`Key: ${key} - Value: ${obj[key]}`);
-          if (typeof obj[key] === "object") {
-            iterateObject(obj[key]);
-          }
-        });
-      };
-      iterateObject(this.score.categories);
+      const numberOfMultipliers = Object.keys(this.score.industryPoints).length;
+      console.log(numberOfMultipliers);
     }
   }
 };

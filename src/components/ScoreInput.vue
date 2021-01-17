@@ -1,22 +1,19 @@
 <template>
   <div>
     <div class="score-input-container">
-      <label class="score-input-label" :for="field.name">{{
-        field.name
-      }}</label>
+      <label class="score-input-label" :for="label">{{ label }}</label>
       <div class="score-button-container">
-        <button class="btn-counter" @click="decrement">
+        <button class="btn-counter" @click="updateField('decrement')">
           -
         </button>
-
         <input
           type="number"
           class="score-input"
-          :name="field.name"
-          :id="field.name"
-          v-model="field.value"
+          :name="label"
+          :id="label"
+          v-model="value"
         />
-        <button class="btn-counter" @click="increment">+</button>
+        <button class="btn-counter" @click="updateField('increment')">+</button>
       </div>
     </div>
   </div>
@@ -24,17 +21,19 @@
 <script>
 export default {
   props: {
-    field: Object
+    label: String,
+    value: Number
   },
   methods: {
-    increment() {
-      this.field.value++;
-      this.$emit("scoreUpdated", this.field.value);
-    },
-    decrement() {
-      if (this.field.value > 0) {
-        this.field.value--;
-        this.$emit("scoreUpdated", this.field.value);
+    updateField(updateDirection) {
+      console.log(updateDirection);
+      if (updateDirection === "increment") {
+        this.$emit("valueUpdated", "incremented");
+      }
+      if (updateDirection === "decrement") {
+        if (this.value > 0) {
+          this.$emit("valueUpdated", "decremented");
+        }
       }
     }
   }
