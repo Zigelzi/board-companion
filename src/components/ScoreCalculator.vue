@@ -2,6 +2,7 @@
   <div id="score-calculator">
     <div>
       <h2>Player Score</h2>
+      <p>{{ score.total }}</p>
       <div id="score-form">
         <div class="points-container">
           <h3>Gross Points</h3>
@@ -12,14 +13,19 @@
           />
         </div>
         <div class="character-point-container">
-          <h3>Character Points</h3>
-          <v-score-input
+          <div
             v-for="(character, name, index) in score.characterPoints"
             :key="`characterMultipliers-${index}`"
-            :content="character"
-            @valueUpdated="updateScore"
-          />
+            class="character-card"
+          >
+            <h3>Character Points</h3>
+            <v-score-input :content="character" @valueUpdated="updateScore" />
+            <div>
+              <p>Points: {{ character.calculatedPoints }}</p>
+            </div>
+          </div>
         </div>
+
         <div class="industry-point-container">
           <h3>Industry Points</h3>
           <div
@@ -91,16 +97,6 @@ export default {
             multiplier: 0,
             calculatedPoints: 0
           }
-        },
-        characterMultipliers: {
-          generals: {
-            name: "Generals",
-            calculatedPoints: 0
-          },
-          financers: {
-            name: "Financers",
-            calculatedPoints: 0
-          }
         }
       }
     };
@@ -109,13 +105,64 @@ export default {
     updateScore(updatedField) {
       // Update industry points when GP updates
       // Calculate Industry scores
-      this.calculateIndustryPoints(updatedField);
-      // Calculate General Scores
-      // Calculate Financer scores
+      if (updatedField.name === "Victory Points") {
+        this.calculateAllCategoryPoints(this.score.industryPoints);
+      } else {
+        this.calculateIndustryPoints(updatedField);
+      }
+      if (this.isCharacterField(updatedField)) {
+        this.calculateCharacterPoints(updatedField);
+      }
+
+      this.calculateTotalPoints();
     },
+
     calculateIndustryPoints(industry) {
       industry.calculatedPoints =
         this.score.victoryPoints.grossPoints * industry.multiplier;
+    },
+    calculateAllCategoryPoints(category) {
+      let totalCategoryPoints = 0;
+      if (this.isCharacterPoints(category)) {
+        for (var characterKey in category) {
+          this.calculateCharacterPoints(category[characterKey]);
+          totalCategoryPoints += category[characterKey].calculatedPoints;
+        }
+      } else {
+        for (var industryKey in category) {
+          this.calculateIndustryPoints(category[industryKey]);
+          totalCategoryPoints += category[industryKey].calculatedPoints;
+        }
+      }
+      return totalCategoryPoints;
+    },
+    isCharacterField(field) {
+      if (field.name === "Generals" || field.name === "Financers") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isCharacterPoints(category) {
+      if (Object.is(category, this.score.characterPoints)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    calculateCharacterPoints(character) {
+      character.calculatedPoints = character.grossPoints * character.multiplier;
+    },
+    calculateTotalPoints() {
+      // console.log(this.score.industryPoints);
+      // console.log(this.score.characterPoints);
+      let totalIndustryPoints = this.calculateAllCategoryPoints(
+        this.score.industryPoints
+      );
+      let totalCharacterPoints = this.calculateAllCategoryPoints(
+        this.score.characterPoints
+      );
+      this.score.total = totalIndustryPoints + totalCharacterPoints;
     }
   }
 };

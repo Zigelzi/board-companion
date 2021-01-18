@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     updateMultiplier(updateDirection) {
-      console.log(updateDirection);
       if (updateDirection === "increment") {
         this.content.multiplier++;
         this.$emit("valueUpdated", this.content);
@@ -62,7 +61,6 @@ export default {
       }
     },
     updateGrossPoints(updateDirection) {
-      console.log(updateDirection);
       if (updateDirection === "increment") {
         this.content.grossPoints++;
         this.$emit("valueUpdated", this.content);
