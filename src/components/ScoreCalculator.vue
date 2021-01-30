@@ -121,7 +121,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .industry-card {
   padding: 25px 0;
 }

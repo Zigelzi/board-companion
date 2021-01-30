@@ -16,7 +16,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style>
 .player {
   display: flex;
   justify-content: space-between;
