@@ -75,26 +75,31 @@ export default {
           industry: {
             name: "Industry",
             multiplier: 0,
+            grossPoints: 0,
             calculatedPoints: 0
           },
           military: {
             name: "Military",
             multiplier: 0,
+            grossPoints: 0,
             calculatedPoints: 0
           },
           science: {
             name: "Science",
             multiplier: 0,
+            grossPoints: 0,
             calculatedPoints: 0
           },
           economy: {
             name: "Economy",
             multiplier: 0,
+            grossPoints: 0,
             calculatedPoints: 0
           },
           discovery: {
             name: "Discovery",
             multiplier: 0,
+            grossPoints: 0,
             calculatedPoints: 0
           }
         }
