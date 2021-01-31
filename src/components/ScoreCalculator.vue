@@ -120,9 +120,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.industry-card {
-  padding: 25px 0;
-}
-</style>

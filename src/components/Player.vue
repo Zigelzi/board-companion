@@ -1,7 +1,7 @@
 <template>
-  <div class="player">
+  <div class="flex justify-between items-center mb-2">
     <p>{{ player.number }} - {{ player.name }}</p>
-    <button class="player-remove-button" @click="removePlayer">X</button>
+    <button class="p-3 bg-red-500" @click="removePlayer">X</button>
   </div>
 </template>
 <script>
@@ -17,7 +17,7 @@ export default {
 };
 </script>
 <style>
-.player {
+/* .player {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,5 +29,5 @@ export default {
   padding: 10px;
   background: tomato;
   font-weight: 600;
-}
+} */
 </style>

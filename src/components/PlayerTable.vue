@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Players</h2>
+    <h2 class="text-xl">Players</h2>
     <div v-if="players.length != 0">
       <v-player
         v-for="player in players"

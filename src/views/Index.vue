@@ -1,28 +1,13 @@
 <template>
-  <div id="index">
-    <header>
-      <h1>Board Companion</h1>
-      <h2>Calculate your board game scores</h2>
-    </header>
-    <section>
-      <v-player-container />
-    </section>
-    <section>
-      <v-score-calculator />
-    </section>
+  <div id="index" class="flex justify-center mt-12">
+    <v-button>
+      <router-link :to="{ name: 'NewGame' }">New Game</router-link>
+    </v-button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import PlayerContainer from "@/components/PlayerContainer.vue";
-import ScoreCalculator from "@/components/ScoreCalculator.vue";
-
 export default {
-  name: "Home",
-  components: {
-    "v-player-container": PlayerContainer,
-    "v-score-calculator": ScoreCalculator
-  }
+  name: "Home"
 };
 </script>

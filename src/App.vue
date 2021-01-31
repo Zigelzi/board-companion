@@ -1,7 +1,15 @@
 <template>
   <div id="app">
-    <nav id="nav"><router-link to="/">Home</router-link></nav>
-    <router-view />
+    <div class="container mx-auto text-gray-200">
+      <header class="mb-4 ">
+        <h1 class="text-4xl ">Board Companion</h1>
+        <h2>Calculate your Wonderful World score!</h2>
+        <v-button>
+          <router-link :to="{ name: 'Index' }">Home</router-link>
+        </v-button>
+      </header>
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -19,16 +27,5 @@ p {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  padding: 20px 20px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

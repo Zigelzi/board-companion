@@ -1,41 +1,44 @@
 <template>
   <div>
-    <div class="score-input-container" v-if="multiplierExist">
-      <label class="score-input-label" :for="content.name">{{
+    <div class="mb-5" v-if="multiplierExist">
+      <label class="text-lg text-center block mb-2" :for="content.name">{{
         content.name + " multiplier"
       }}</label>
-      <div class="score-button-container">
-        <button class="btn-counter" @click="updateMultiplier('decrement')">
+      <div class="flex justify-between text-gray-700">
+        <button class="bg-gray-300 p-4" @click="updateMultiplier('decrement')">
           -
         </button>
         <input
           type="number"
-          class="score-input"
+          class="text-center"
           :name="content.name"
           :id="content.name"
           v-model="content.multiplier"
         />
-        <button class="btn-counter" @click="updateMultiplier('increment')">
+        <button class="bg-gray-300 p-4" @click="updateMultiplier('increment')">
           +
         </button>
       </div>
     </div>
-    <div class="score-input-container" v-if="grossPointsExist">
-      <label class="score-input-label" :for="content.name">{{
+    <div class="mb-5" v-if="grossPointsExist">
+      <label class="text-lg text-center block mb-2" :for="content.name">{{
         content.name + " points"
       }}</label>
-      <div class="score-button-container">
-        <button class="btn-counter" @click="updateGrossPoints('decrement')">
+      <div class="flex justify-between text-gray-700">
+        <button
+          class="bg-gray-300 p-4 "
+          @click="updateGrossPoints('decrement')"
+        >
           -
         </button>
         <input
           type="number"
-          class="score-input"
+          class="text-center"
           :name="content.name"
           :id="content.name"
           v-model="content.grossPoints"
         />
-        <button class="btn-counter" @click="updateGrossPoints('increment')">
+        <button class="bg-gray-300 p-4" @click="updateGrossPoints('increment')">
           +
         </button>
       </div>
@@ -86,28 +89,3 @@ export default {
   }
 };
 </script>
-<style>
-.score-input-container {
-  margin-bottom: 25px;
-}
-
-.score-button-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.score-input {
-  max-width: 100px;
-}
-
-.score-input-label {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-.btn-counter {
-  background: #cacaca;
-  border: none;
-  padding: 20px;
-}
-</style>
