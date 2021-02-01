@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     addPlayer() {
-      this.$emit("playerAdded", this.playerName);
+      this.$store.commit("addPlayer", this.playerName);
       this.playerName = "";
     }
   }

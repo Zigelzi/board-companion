@@ -20,17 +20,15 @@ export default {
   components: {
     "v-player": Player
   },
-  props: {
-    players: Array
-  },
   methods: {
     removePlayer(player) {
-      this.$emit("playerRemoved", player);
+      this.$store.commit("removePlayer", player);
+    }
+  },
+  computed: {
+    players() {
+      return this.$store.getters.getPlayers;
     }
   }
 };
 </script>
-<style>
-.player {
-}
-</style>
