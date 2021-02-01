@@ -18,19 +18,22 @@ const routes = [
     component: Index
   },
   {
-    path: "/calculate_character_points",
+    path: "/calculate_character_points/:playerNumber",
     name: "CalculateCharPoints",
-    component: CalculateCharPoints
+    component: CalculateCharPoints,
+    props: true
   },
   {
-    path: "/calculate_gross_points",
+    path: "/calculate_gross_points/:playerNumber",
     name: "CalculateGrossPoints",
-    component: CalculateGrossPoints
+    component: CalculateGrossPoints,
+    props: true
   },
   {
-    path: "/calculate_industry_points",
+    path: "/calculate_industry_points/:playerNumber",
     name: "CalculateIndustryPoints",
-    component: CalculateIndustryPoints
+    component: CalculateIndustryPoints,
+    props: true
   },
   {
     path: "/game_index",

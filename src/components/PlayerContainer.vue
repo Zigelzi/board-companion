@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-add-player @playerAdded="addPlayer" />
+    <v-add-player />
     <v-player-table />
   </div>
 </template>

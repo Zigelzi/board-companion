@@ -1,19 +1,34 @@
 <template>
   <div class="pt-4">
     <h4 class="text-xl text-center">Gross Points for</h4>
-    <p class="text-2xl text-center">Matti Möttönen</p>
-    <div class="flex justify-end">
+    <p class="text-2xl text-center">{{ player.name }}</p>
+    <div class="flex justify-between">
+      <div v-if="!firstPlayer">
+        <v-button
+          ><router-link
+            :to="{
+              name: 'CalculateIndustryPoints',
+              params: { playerNumber: player.number - 1 }
+            }"
+            >Previous player</router-link
+          ></v-button
+        >
+      </div>
       <v-button
-        ><router-link :to="{ name: 'CalculateCharPoints' }"
+        ><router-link
+          :to="{
+            name: 'CalculateCharPoints',
+            params: { playerNumber: player.number }
+          }"
           >To character points</router-link
         ></v-button
       >
     </div>
     <v-score-input
       class="mt-4"
-      :content="score.victoryPoints"
+      :content="player.score.victoryPoints"
       key="victory-points"
-      @valueUpdated="updateTotalScore"
+      @valueUpdated="updatePoints"
     />
   </div>
 </template>
@@ -25,15 +40,25 @@ export default {
   components: {
     "v-score-input": ScoreInput
   },
-  data() {
-    return {
-      score: {
-        victoryPoints: {
-          name: "Victory Points",
-          grossPoints: 0
-        }
+  props: {
+    playerNumber: Number
+  },
+  computed: {
+    player() {
+      return this.$store.getters.getPlayerByNumber(this.playerNumber);
+    },
+    firstPlayer() {
+      if (this.player.number === 1) {
+        return true;
+      } else {
+        return false;
       }
-    };
+    }
+  },
+  methods: {
+    updatePoints() {
+      this.$store.commit("updatePlayerState", this.player);
+    }
   }
 };
 </script>
