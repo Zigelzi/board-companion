@@ -86,10 +86,10 @@ export default {
   name: "TotalView",
   computed: {
     sortedPlayers() {
-      return this.$store.getters.getSortedPlayers;
+      return this.$store.getters.getSortedPlayers(true);
     },
     winner() {
-      return this.sortedPlayers[this.sortedPlayers.length - 1];
+      return this.sortedPlayers[0];
     }
   }
 };

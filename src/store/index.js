@@ -112,11 +112,15 @@ export default new Vuex.Store({
     getPlayerByNumber: state => playerNumber => {
       return state.players.find(player => player.number === playerNumber);
     },
-    getSortedPlayers(state) {
+    getSortedPlayers: state => isDescending => {
       let sortedPlayers = state.players.sort((player1, player2) => {
-        return player1.total - player2.total;
+        return player1.score.total - player2.score.total;
       });
-      return sortedPlayers;
+      if (isDescending) {
+        return sortedPlayers.reverse();
+      } else {
+        return sortedPlayers;
+      }
     }
   }
 });
