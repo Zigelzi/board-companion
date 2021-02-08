@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="mt-8">
     <div>
-      <h4 class="text-3xl">Wonderful World</h4>
-      <p>31.1.2021</p>
+      <h4 class="text-2xl mb-2">2 - Play the game</h4>
+      <p class="mb-1">Chill, have fun and play the four rounds as usual.</p>
+      <p>When you're done, start calculating each player score</p>
       <v-button
         ><router-link
           :to="{ name: 'CalculateGrossPoints', params: { playerNumber: 1 } }"

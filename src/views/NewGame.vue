@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h3 class="text-3xl mt-8 mb-2">New game</h3>
+  <div class="mt-8">
+    <h3 class="text-2xl mb-2">1 - Add players</h3>
     <v-button class="mb-4">
-      <router-link :to="{ name: 'GameIndex' }">Start game!</router-link>
+      <router-link :to="{ name: 'GameIndex' }">Start game</router-link>
     </v-button>
     <v-player-container />
   </div>

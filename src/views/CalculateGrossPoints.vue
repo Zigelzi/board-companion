@@ -1,7 +1,7 @@
 <template>
   <div class="pt-4">
-    <h4 class="text-xl text-center">Gross Points for</h4>
-    <p class="text-2xl text-center">{{ player.name }}</p>
+    <h4 class="text-m text-center">Gross Points for</h4>
+    <p class="text-3xl text-center">{{ player.name }}</p>
     <div class="flex justify-between">
       <div v-if="!firstPlayer">
         <v-button
