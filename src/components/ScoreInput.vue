@@ -6,20 +6,20 @@
       }}</label>
       <div class="flex justify-between text-gray-700">
         <button
-          class="bg-gray-300 p-4 text-3xl"
+          class="bg-gray-300 mr-4 w-14 h-14 text-3xl flex-none"
           @click="updateMultiplier('decrement')"
         >
           -
         </button>
         <input
           type="number"
-          class="text-center text-3xl"
+          class="text-center text-3xl flex-shrink min-w-0"
           :name="content.name"
           :id="content.name"
           v-model="content.multiplier"
         />
         <button
-          class="bg-gray-300 p-4 text-3xl"
+          class="bg-gray-300 ml-4 w-14 h-14 text-3xl flex-none"
           @click="updateMultiplier('increment')"
         >
           +
@@ -30,22 +30,22 @@
       <label class="text-lg text-center block mb-2" :for="content.name">{{
         content.name + " points"
       }}</label>
-      <div class="flex-auto justify-between text-gray-700">
+      <div class="flex justify-between text-gray-700">
         <button
-          class="bg-gray-300 p-4 text-3xl"
+          class="bg-gray-300 mr-4 w-14 h-14 text-3xl flex-none"
           @click="updateGrossPoints('decrement')"
         >
           -
         </button>
         <input
           type="number"
-          class="text-center text-3xl"
+          class="text-center text-3xl flex-shrink min-w-0"
           :name="content.name"
           :id="content.name"
           v-model="content.grossPoints"
         />
         <button
-          class="bg-gray-300 p-4 text-3xl"
+          class="bg-gray-300 ml-4 w-14 h-14 text-3xl flex-none"
           @click="updateGrossPoints('increment')"
         >
           +
