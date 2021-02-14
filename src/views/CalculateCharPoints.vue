@@ -29,6 +29,7 @@
           :key="`characterMultipliers-${index}`"
           class="character-card"
         >
+          <h4 class="text-2xl text-center">{{ character.name }}</h4>
           <v-score-input :content="character" @valueUpdated="updatePoints" />
         </div>
       </div>

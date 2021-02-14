@@ -2,7 +2,7 @@
   <div>
     <div class="mb-5" v-if="multiplierExist">
       <label class="text-lg text-center block mb-2" :for="content.name">{{
-        content.name + " multiplier"
+        "Multiplier"
       }}</label>
       <div class="flex justify-between text-gray-700">
         <button
@@ -28,7 +28,7 @@
     </div>
     <div class="mb-5" v-if="grossPointsExist">
       <label class="text-lg text-center block mb-2" :for="content.name">{{
-        content.name + " points"
+        "Tokens"
       }}</label>
       <div class="flex justify-between text-gray-700">
         <button
