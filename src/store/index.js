@@ -3,6 +3,8 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+// Helper methods that can be extracted to separate file at some point
+
 function updatePlayerNumbers(state) {
   state.players.forEach((player, index) => {
     player.number = index + 1;
@@ -34,9 +36,25 @@ function findPlayerFromArray(state, player) {
   return foundPlayer;
 }
 
+function isPlayerLimitFull(numberOfPlayers, playerLimit) {
+  let isPlayerLimitFull;
+  if (numberOfPlayers < playerLimit) {
+    isPlayerLimitFull = false;
+    return isPlayerLimitFull;
+  } else {
+    isPlayerLimitFull = true;
+    return isPlayerLimitFull;
+  }
+}
+
+// The actual Store
+
 export default new Vuex.Store({
   state: {
-    players: []
+    players: [],
+    minPlayers: 3,
+    maxPlayers: 5,
+    isPlayerLimitFull: false
   },
   mutations: {
     addPlayer(state, playerName) {
@@ -90,11 +108,23 @@ export default new Vuex.Store({
           }
         }
       };
-      state.players.push(player);
+
+      if (!isPlayerLimitFull(state.players.length, state.maxPlayers)) {
+        state.players.push(player);
+        // Check that after updating the player list that have we reached the limit
+        if (isPlayerLimitFull(state.players.length, state.maxPlayers)) {
+          state.isPlayerLimitFull = true;
+        }
+      } else {
+        state.isPlayerLimitFull = true;
+      }
     },
     removePlayer(state, player) {
       state.players.splice(player.number - 1, 1); // Players are indexed from 1
       updatePlayerNumbers(state);
+      if (state.players.length < state.maxPlayers) {
+        state.isPlayerLimitFull = false;
+      }
     },
     updatePlayerState(state, player) {
       // Find and update the player status
@@ -121,6 +151,9 @@ export default new Vuex.Store({
       } else {
         return sortedPlayers;
       }
+    },
+    getPlayerLimitState(state) {
+      return state.isPlayerLimitFull;
     }
   }
 });
